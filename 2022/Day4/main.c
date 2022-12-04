@@ -51,5 +51,5 @@ int main(void) {
 	}
 
 	printf("%d %d", u32Sum, (u32Lines - u32Sum2));
-	return(0);
+	return(0); 
 }
