@@ -18,6 +18,7 @@ int main(void) {
     uint8_t u8ID;
     uint8_t u8Num;
     uint8_t u8Valid;
+    
             
     
     char u8Buf[256];
@@ -26,17 +27,22 @@ int main(void) {
     
     u32FD    = open("input.txt", 0);
     u32Sum   = 0;
+    
     u8Buflen = 0;
+    u8ID     = 0;
     
     for( ;(read(u32FD, &u8Char, 1u)) != 0; ) {
 
         if((u8Char == '\n') || u8Char == EOF) {
 
             u8Buf[u8Buflen] = 0;
-            u8ID            = 0;
+         
             u8Num           = 0;
             u8Idx           = 0;
             u8Valid         = 1;
+            
+            /* Increment line ID */
+            ++u8ID;
             
             /* Move over ID since we don't need it yet */
             for(; u8Buf[u8Idx] != ':'; ++u8Idx)
@@ -74,23 +80,6 @@ int main(void) {
             }
 
             if(u8Valid) {
-                
-                /* Move after empty space */
-                for(u8Idx = 0; ;) {
-                
-                    if(u8Buf[u8Idx] != ' ')
-                        ++u8Idx;
-                    else
-                        break;
-                
-                }
-            
-                ++u8Idx;
-            
-                /* Get the ID */
-                
-                for(; u8Buf[u8Idx] != ':'; ++u8Idx)
-                    u8ID = (u8ID * 10) + (u8Buf[u8Idx] & 0x0Fu);
                 
                 printf("Game ID: [%d] is Valid\n", u8ID);
                 u32Sum += u8ID;
